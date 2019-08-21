@@ -1,0 +1,75 @@
+# Helicon ISAPI_Rewrite configuration file
+# Version 3.1.0.73
+
+RewriteEngine On
+RewriteBase /
+
+RewriteRule includes/libs/chkcode\.htm$ includes/libs/chkcode\.php
+RewriteRule includes/libs/chkcode\.htm\?t=(.*)$ includes/libs/chkcode\.php\?t=$1
+
+RewriteCond %{QUERY_STRING} ^orderid=(.+)$
+RewriteRule orderquery\.htm$ index\.php\?mod=orderquery&orderid=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^st=(.+)&kw=(.+)$
+RewriteRule orderquery\.htm$ index\.php\?mod=orderquery&st=%1&kw=%2 [L]
+
+RewriteCond %{QUERY_STRING} ^do=export&orderid=(.+)$
+RewriteRule orderquery\.htm$ index\.php\?mod=orderquery&do=export&orderid=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^id=(.+)$
+RewriteRule ^view\.htm$ index\.php\?mod=view&id=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^clientid=newusername&newusername=(.+)$
+RewriteRule ^checkuser\.htm$ index\.php\?mod=checkuser&clientid=newusername&newusername=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^key=(.+)$
+RewriteRule ^register\.htm$ index\.php\?mod=register&key=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^token=(.+)$
+RewriteRule ^setnewpwd\.htm$ index\.php\?mod=setnewpwd&token=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^orderid=(.+)$ [OR]
+RewriteCond %{REQUEST_URI} ^/result.htm$
+RewriteRule ^result\.htm$ index\.php\?mod=result&orderid=%1 [L]
+
+RewriteCond %{QUERY_STRING} ^orderid=(.+)$ [OR]
+RewriteCond %{REQUEST_URI} ^/checkgoods\.htm$
+RewriteRule ^checkgoods\.htm$ index.php\?mod=checkgoods&orderid=%1 [L]
+
+RewriteRule ^lin/go\.htm$ lin/go\.php
+RewriteRule ^lin/go\.htm\?orderid=([0-9a-zA-Z]*)$ lin/go\.php\?orderid=$1
+
+RewriteRule ^lin/([0-9a-zA-Z]*)$ lin/index\.php\?id=$1
+RewriteRule ^cay/([0-9a-zA-Z]*)$ cay/index\.php\?id=$1
+RewriteRule ^prt/([0-9a-zA-Z]+)-([0-9]+)-([0-9a-zA-Z]+)$ prt/index\.php\?id=$1&num=$2&username=$3
+RewriteRule ^prt/([0-9a-zA-Z]*)$ prt/index\.php\?id=$1
+
+RewriteRule ^good/([0-9a-zA-Z]*)$ index\.php\?mod=good&linkid=$1
+
+RewriteRule ^cate/(.+)/(.+)/(.+)$ index\.php\?mod=cate&linkid=$1&view=$2&pageno=$3 [L]
+RewriteRule ^cate/(.+)/(.+)$ index\.php\?mod=cate&linkid=$1&pageno=$2 [L]
+RewriteRule ^cate/([0-9a-zA-Z]*)$ index\.php\?mod=cate&linkid=$1
+
+RewriteRule ^store/(.+)/(.+)/(.+)$ index\.php\?mod=store&linkid=$1&view=$2&pageno=$3
+RewriteRule ^store/(.+)/(.+)$ index\.php\?mod=store&linkid=$1&pageno=$2
+RewriteRule ^store/([0-9a-zA-Z]*)$ index\.php\?mod=store&linkid=$1
+
+RewriteRule ^search/(.+)/(.+)/(.+)$ index\.php\?mod=search&keyword=$1&view=$2&pageno=$3
+RewriteRule ^search/(.+)/(.+)$ index\.php\?mod=search&keyword=$1&pageno=$2
+RewriteRule ^search/(.+)$ index\.php\?mod=search&keyword=$1
+
+RewriteRule ^goods/(.+)/(.+)$ index\.php\?mod=goods&view=$1&pageno=$2
+RewriteRule ^goods/(.+)$ index\.php\?mod=goods&pageno=$1
+RewriteRule ^goods index\.php\?mod=goods
+
+RewriteRule ^cates/(.+)$ index\.php\?mod=cates&pageno=$1
+RewriteRule ^cates index\.php\?mod=cates
+
+RewriteRule ^article/(.+)/(.+)$ index\.php\?mod=article&classid=$1&pageno=$2
+RewriteRule ^article/(.+)$ index\.php\?mod=article&classid=$1
+RewriteRule ^article index\.php\?mod=article
+
+RewriteRule ^([0-9a-zA-Z]{5,6})\.html$ usr\/mypaylinks\.php\?id=$1
+RewriteRule ([a-z]*)\.htm(.*)$ index\.php\?mod=$1
+
+
